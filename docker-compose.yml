@@ -1,0 +1,27 @@
+version: '3'
+networks:   
+    labs-net:
+
+services:
+    weatherapi:
+        build:
+            context:    .
+            dockerfile:  Dockerfile.application
+        container_name: weatherapi
+        hostname: weatherapi
+        ports: 
+            -   5001:80
+        networks: 
+            -   labs-net
+    nginx:
+        build:
+            context:    .
+            dockerfile:  Dockerfile.nginx
+        container_name: proxy
+        hostname: proxy
+        depends_on: 
+            -   weatherapi
+        ports: 
+            -   8080:80
+        networks: 
+            -   labs-net
