@@ -6,25 +6,24 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 
-namespace labs
+namespace apiGateway
 {
     public class Startup
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration _Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -33,20 +32,21 @@ namespace labs
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "labs", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "apiGateway", Version = "v1" });
             });
-            services.AddDbContext<LabContext>(_ => _.UseSqlServer());
-            // Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseInternalServiceProvider();
+
+            services.AddHealthChecks();
+            services.AddOcelot(_Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "labs v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "apiGateway v1"));
             }
 
             app.UseHttpsRedirection();
@@ -54,6 +54,10 @@ namespace labs
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseHealthChecks("/health");
+
+            await app.UseOcelot();
 
             app.UseEndpoints(endpoints =>
             {

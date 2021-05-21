@@ -5,6 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="GraphQL" Version="4.3.0" />
+    <PackageReference Include="GraphQL.Server.Ui.GraphiQL" Version="5.0.1" />
+    <PackageReference Include="GraphQL.SystemTextJson" Version="4.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

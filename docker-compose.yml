@@ -5,14 +5,28 @@ networks:
 services:
     weatherapi:
         build:
-            context:    .
-            dockerfile:  Dockerfile.application
+            context: .
+            dockerfile:  weatherForecast/Labs.Api/Dockerfile.application
         container_name: weatherapi
         hostname: weatherapi
         ports: 
             -   5001:80
+        depends_on: 
+            - customerapi
         networks: 
             -   labs-net
+
+    customerapi:
+        build:
+            context: .
+            dockerfile:  apiGateway/ApiGateway.Api/Dockerfile
+        container_name: customerapi
+        hostname: customerapi
+        ports: 
+            -   5000:80
+        networks: 
+            -   labs-net
+
     nginx:
         build:
             context:    .
@@ -21,6 +35,7 @@ services:
         hostname: proxy
         depends_on: 
             -   weatherapi
+            -   customerapi
         ports: 
             -   8080:80
         networks: 
