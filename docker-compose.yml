@@ -27,6 +27,17 @@ services:
         networks: 
             -   labs-net
 
+    clienteapi:
+        build:
+            context: .
+            dockerfile:  cliente/Cliente.Api/Dockerfile
+        container_name: clienteapi
+        hostname: clienteapi
+        ports: 
+            -   5002:80
+        networks: 
+            -   labs-net
+
     nginx:
         build:
             context:    .
@@ -38,5 +49,13 @@ services:
             -   customerapi
         ports: 
             -   8080:80
+        networks: 
+            -   labs-net
+#######################################
+    mongodb:
+        image: bitnami/mongodb:4.4
+        restart: always
+        ports: 
+            -   27017:27017
         networks: 
             -   labs-net
