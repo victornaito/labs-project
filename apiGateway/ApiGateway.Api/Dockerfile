@@ -7,13 +7,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 COPY ["apiGateway/ApiGateway.Api/apiGateway.csproj", "/apigateway"]
-COPY ["apiGateway/ApiGateway.Api/ocelot.json", "/apigateway"]
 COPY . .
-WORKDIR /apiGateway/ApiGateway.Api
+WORKDIR /apiGateway/ApiGateway.Api/
 RUN dotnet build "apiGateway.csproj" -c Release
 
 FROM build AS publish
-RUN dotnet publish "apiGateway.csproj" -c Release -o /app/publish
+RUN dotnet publish "apiGateway.csproj" --no-restore -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

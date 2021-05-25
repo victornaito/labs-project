@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using cliente.Cliente.Api.Domain;
-using cliente.Cliente.Api.Domain.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MongoDB.Driver;
 
 namespace Cliente.Api.Controllers
 {
@@ -14,21 +11,30 @@ namespace Cliente.Api.Controllers
     [Route("[controller]")]
     public class ClienteController : ControllerBase
     {
-        private readonly ILogger<ClienteController> _logger;
-        private readonly IUserRepository _userRepository;
+        private static readonly string[] Summaries = new[]
+        {
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
 
-        public ClienteController(ILogger<ClienteController> logger,
-                                IUserRepository userRepository)
+        private readonly ILogger<ClienteController> _logger;
+
+        public ClienteController(ILogger<ClienteController> logger)
         {
             _logger = logger;
-            this._userRepository = userRepository;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] int age, [FromBody] string name)
+        [HttpGet]
+        public IActionResult Get()
         {
-            await _userRepository.SaveAsync(new User { Age = age, Name = name});
-            return Ok();
+            var rng = new Random();
+            return Ok(Enumerable.Range(1, 5).Select(index => new 
+                {
+                    Name = "Jose",
+                    Sobrenome = "indamoganhada",
+                    Summary = Summaries[rng.Next(Summaries.Length)]
+                })
+                .ToArray()
+            );
         }
     }
 }
