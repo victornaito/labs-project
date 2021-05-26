@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using cliente.Cliente.Api.Domain.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -17,24 +18,20 @@ namespace Cliente.Api.Controllers
         };
 
         private readonly ILogger<ClienteController> _logger;
+        private readonly IUserRepository _userRepository;
 
-        public ClienteController(ILogger<ClienteController> logger)
+        public ClienteController(ILogger<ClienteController> logger,
+                                 IUserRepository userRepository)
         {
             _logger = logger;
+            this._userRepository = userRepository;
         }
 
-        [HttpGet]
-        public IActionResult Get()
+        [HttpPost]
+        public IActionResult Post([FromBody] string name, [FromBody] short age)
         {
-            var rng = new Random();
-            return Ok(Enumerable.Range(1, 5).Select(index => new 
-                {
-                    Name = "Jose",
-                    Sobrenome = "indamoganhada",
-                    Summary = Summaries[rng.Next(Summaries.Length)]
-                })
-                .ToArray()
-            );
+            _userRepository.SaveAsync(new cliente.Cliente.Api.Domain.User { Name = name, Age = age });
+            return Ok();
         }
     }
 }
