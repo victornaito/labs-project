@@ -44,7 +44,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ./
-        file: ./cliente/Cliente.Api/Dockerfile
+        file: cliente/Cliente.Api/Dockerfile
         builder: ${{ steps.buildx.outputs.name }}
         push: true
         tags:  ${{ secrets.DOCKER_USER }}/naito10:latest
