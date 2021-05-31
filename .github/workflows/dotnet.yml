@@ -27,4 +27,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Docker Push Registry
-      run: docker login -u ${{github.DOCKER_USER}} -p ${{github.DOCKER_PASSWORD}}
+      run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
