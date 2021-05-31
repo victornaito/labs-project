@@ -34,6 +34,8 @@ jobs:
     #   run: docker build -t naito10/cliente:1-develop-latest -f cliente/Cliente.Api/Dockerfile .
     # - name: Docker Push Registry
     #   run: docker push naito10/cliente:${{github.GITHUB_RUN_NUMBER}}-develop-latest
+    - name: LS -la
+      run: ls -la
     - name: Login to Docker Hub
       uses: docker/login-action@v1
       with:
