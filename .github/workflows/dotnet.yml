@@ -31,6 +31,6 @@ jobs:
       run: |
         docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
     - name: Docker Build Registry
-      run: docker build -t naito10/cliente:${{github.GITHUB_RUN_NUMBER}}-develop-latest .
+      run: docker build -t naito10/cliente:${{github.GITHUB_RUN_NUMBER}}-develop-latest -f cliente/Cliente.Api/Dockerfile .
     - name: Docker Push Registry
       run: docker push naito10/cliente:${{github.GITHUB_RUN_NUMBER}}-develop-latest
