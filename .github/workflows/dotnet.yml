@@ -45,7 +45,7 @@ jobs:
       id: docker_build
       uses: docker/build-push-action@v2
       with:
-        context: .
+        context: ./cliente/cliente/Cliente.Api
         file: cliente/Cliente.Api/Dockerfile
         builder: ${{ steps.buildx.outputs.name }}
         push: true
