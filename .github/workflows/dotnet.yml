@@ -48,6 +48,6 @@ jobs:
         context: .
         file: ./cliente/cliente/Cliente.Api/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/cliente-api:latest
+        tags: ${{ secrets.DOCKER_USER }}/cliente-api:latest
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
