@@ -44,8 +44,8 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Docker Build
       run: |
-        cd ./cliente/Cliente.Api/
-        docker build -f ./cliente/Cliente.Api/Dockerfile --tag ${{ secrets.DOCKER_USER }}/cliente-api:latest .
+        cd ./cliente/Cliente.Api
+        docker build -f Dockerfile --tag ${{ secrets.DOCKER_USER }}/cliente-api:latest .
     - name: Docker Push
       run: docker push ${{ secrets.DOCKER_USER }}/cliente-api:latest
     - name: Image digest
