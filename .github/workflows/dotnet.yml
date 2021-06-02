@@ -45,11 +45,8 @@ jobs:
       id: docker_build
       uses: docker/build-push-action@v2
       with:
-        context: ./cliente/cliente/Cliente.Api
-        file: cliente/Cliente.Api/Dockerfile
-        builder: ${{ steps.buildx.outputs.name }}
+        context: .
+        file: ./cliente/cliente/Cliente.Api/Dockerfile
         push: true
-        tags:  ${{ secrets.DOCKER_USER }}/naito10:latest
-        run: docker buildx create --use
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
