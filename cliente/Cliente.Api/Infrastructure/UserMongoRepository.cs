@@ -10,8 +10,9 @@ namespace cliente.Cliente.Api.Infrastructure
     {
         private IMongoCollection<User> _userCollection;
 
-        public UserMongoRepository(IMongoClient mongoClient)
+        public UserMongoRepository()
         {
+            IMongoClient mongoClient = new MongoClient();
             _userCollection = mongoClient.GetDatabase("Lab").GetCollection<User>("User");
         }
 
