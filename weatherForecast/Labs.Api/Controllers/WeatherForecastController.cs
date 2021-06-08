@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
+using Newtonsoft.Json;
 
 namespace labs.Controllers
 {
@@ -47,7 +48,7 @@ namespace labs.Controllers
             channel.QueueDeclare(Queue, true, false, false, null);
             channel.QueueBind(Queue, Exchange, RoutingKey);
 
-            channel.BasicPublish(Exchange, RoutingKey, null, UTF8Encoding.UTF8.GetBytes(resultado.ToString()));
+            channel.BasicPublish(Exchange, RoutingKey, null, UTF8Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(resultado)));
 
             connection.Close();
 

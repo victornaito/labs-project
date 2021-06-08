@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using cliente.Cliente.Api.Domain.Abstractions;
 using cliente.Cliente.Api.Infrastructure;
+using Cliente.Api.Infrastructure;
+using Cliente.Api.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +32,7 @@ namespace Cliente.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserMongoRepository>();
+            services.AddHostedService<ConsumerService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
