@@ -1,21 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using cliente.Cliente.Api.Domain.Abstractions;
 using cliente.Cliente.Api.Infrastructure;
 using Cliente.Api.Infrastructure;
-using Cliente.Api.Infrastructure.Interfaces;
+using Cliente.Api.Infrastructure.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using MongoDB.Driver;
+using SharedKernel.Extensions;
+using SharedKernel.Infraestructure.RabbitMQ;
 
 namespace Cliente.Api
 {
@@ -33,6 +27,10 @@ namespace Cliente.Api
         {
             services.AddScoped<IUserRepository, UserMongoRepository>();
             services.AddHostedService<ConsumerService>();
+
+            services.AddScoped<IRabbitMQConnection, RabbitMQConnection>();
+            services.AddScoped<IEventHandler<WeatherEvent>, WeatherEventHandler>();
+            services.Subscribe<IEventHandler<WeatherEvent>, WeatherEventHandler, WeatherEvent>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

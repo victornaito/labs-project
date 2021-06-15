@@ -1,7 +1,5 @@
 ﻿using System.Text;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -9,17 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 using Newtonsoft.Json;
+using SharedKernel.CrossCutting;
 
 namespace labs.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class WeatherForecastController : GenericController
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        
         private const string Exchange = "weather";
         private const string Queue = "weather";
         private const string RoutingKey = "";
@@ -37,8 +31,7 @@ namespace labs.Controllers
         [HttpGet("producer")]
         public async Task<IActionResult> ObterClimasAsync()
         {
-            var resultado = await _httpClient.GetFromJsonAsync<Weather>("https://api.hgbrasil.com/weather");
-            
+            var weatherList = await _httpClient.GetFromJsonAsync<Weather>("https://api.hgbrasil.com/weather");
             ConnectionFactory connectionFactory = new ConnectionFactory();
             connectionFactory.Password = "bitnami";
             connectionFactory.UserName = "user";
@@ -48,11 +41,11 @@ namespace labs.Controllers
             channel.QueueDeclare(Queue, true, false, false, null);
             channel.QueueBind(Queue, Exchange, RoutingKey);
 
-            channel.BasicPublish(Exchange, RoutingKey, null, UTF8Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(resultado)));
+            channel.BasicPublish(Exchange, RoutingKey, null, UTF8Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(weatherList)));
 
             connection.Close();
 
-            return Ok(resultado);
+            return Ok(weatherList);
         }
 
         public class Weather
