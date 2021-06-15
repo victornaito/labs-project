@@ -1,5 +1,4 @@
 using cliente.Cliente.Api.Domain.Abstractions;
-using cliente.Cliente.Api.Infrastructure;
 using Cliente.Api.Infrastructure;
 using Cliente.Api.Infrastructure.Events;
 using Microsoft.AspNetCore.Builder;
@@ -10,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SharedKernel.Extensions;
 using SharedKernel.Infraestructure.RabbitMQ;
+using client.Client.Api.Infrastructure.Repositories;
+using Client.Api.Infrastructure.Services;
 
 namespace Cliente.Api
 {
@@ -26,9 +27,9 @@ namespace Cliente.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserMongoRepository>();
-            services.AddHostedService<ConsumerService>();
+            /* services.AddHostedService<ConsumerService>(); */
 
-            services.AddScoped<IRabbitMQConnection, RabbitMQConnection>();
+            services.AddSingleton<IRabbitMQConnection, RabbitMQConnection>();
             services.AddScoped<IEventHandler<WeatherEvent>, WeatherEventHandler>();
             services.Subscribe<IEventHandler<WeatherEvent>, WeatherEventHandler, WeatherEvent>();
 

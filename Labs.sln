@@ -9,11 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apiGateway", "apiGateway\Ap
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "weatherForecast", "weatherForecast", "{5F9B5171-C5A9-481B-A583-BCB0173BFECB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "labs", "weatherForecast\Labs.Api\labs.csproj", "{6517CD87-3F7F-4F2D-AA94-E8A5CA3526A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labs.Api", "weatherForecast\Labs.Api\Labs.Api.csproj", "{6517CD87-3F7F-4F2D-AA94-E8A5CA3526A6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cliente", "cliente", "{6635157E-FA05-425A-94D3-03CE91518AC8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "client", "client", "{6635157E-FA05-425A-94D3-03CE91518AC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cliente.Api", "cliente\Cliente.Api\Cliente.Api.csproj", "{1B40A11A-E1FF-499A-8F55-865589A616FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Api", "client\Client.Api\Client.Api.csproj", "{1B40A11A-E1FF-499A-8F55-865589A616FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel", "SharedKernel\SharedKernel.csproj", "{B4E07BCA-6DA7-4026-81B9-2A2D28675CEF}"
 EndProject

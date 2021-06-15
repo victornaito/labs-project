@@ -4,7 +4,7 @@ using cliente.Cliente.Api.Domain.Abstractions;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace cliente.Cliente.Api.Infrastructure
+namespace client.Client.Api.Infrastructure.Repositories
 {
     public class UserMongoRepository : IUserRepository
     {

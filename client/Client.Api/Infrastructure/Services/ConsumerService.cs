@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace Cliente.Api.Infrastructure
+namespace Client.Api.Infrastructure.Services
 {
     public class ConsumerService : BackgroundService, IConsumerService
     {

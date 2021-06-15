@@ -7,15 +7,15 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /cliente
-COPY ["cliente/Cliente.Api/Cliente.Api.csproj", "/cliente"]
+COPY ["client/Client.Api/Client.Api.csproj", "/client"]
 COPY . .
-WORKDIR /cliente/cliente/Cliente.Api
-RUN dotnet build "Cliente.Api.csproj" -c Release
+WORKDIR /client/client/Client.Api
+RUN dotnet build "Client.Api.csproj" -c Release
 
 FROM build AS publish
-RUN dotnet publish "Cliente.Api.csproj" -c Release -o /app/publish
+RUN dotnet publish "Client.Api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Cliente.Api.dll"]
+ENTRYPOINT ["dotnet", "Client.Api.dll"]

@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
-using Labs.Api.Domain.AggregateWeather;
+using Labs.Api.Infraestructure.Events;
 
 namespace Labs.Api.Infraestructure.ThirdParty.WeatherAPI
 {
     public interface IWeatherService
     {
-        Task<Weather> Consume();
+        Task<WeatherEvent> ConsumeAsync();
     }
 }
