@@ -1,13 +1,13 @@
-﻿using System.Text;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Json;
+﻿using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 using Newtonsoft.Json;
 using SharedKernel.CrossCutting;
+using Labs.Api.Domain.AggregateWeather;
+using Labs.Api.Infraestructure.ThirdParty.WeatherAPI;
 
 namespace labs.Controllers
 {
@@ -19,19 +19,20 @@ namespace labs.Controllers
         private const string RoutingKey = "";
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly HttpClient _httpClient;
+        private readonly IWeatherService _weatherService;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger,
-                                         HttpClient httpClient)
+                                         IWeatherService weatherService)
         {
-            this._httpClient = httpClient;
             _logger = logger;
+            this._weatherService = weatherService;
         }
 
-        [HttpGet("producer")]
-        public async Task<IActionResult> ObterClimasAsync()
+        [HttpGet]
+        [ProducesResponseType(typeof(Weather), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Get()
         {
-            var weatherList = await _httpClient.GetFromJsonAsync<Weather>("https://api.hgbrasil.com/weather");
+            var weatherList = await _weatherService.Consume();
             ConnectionFactory connectionFactory = new ConnectionFactory();
             connectionFactory.Password = "bitnami";
             connectionFactory.UserName = "user";
@@ -46,30 +47,6 @@ namespace labs.Controllers
             connection.Close();
 
             return Ok(weatherList);
-        }
-
-        public class Weather
-        {
-            public string By { get; set; }
-            public bool Valid_key { get; set; }
-            public Result Results { get; set; }
-
-            public class Result
-            {
-                public float Temp { get; set; }
-                public string Date { get; set; }
-                public string Time { get; set; }
-                public string city_name { get; set; }
-                public List<ForeCast> Forecast { get; set; }
-
-                public class ForeCast
-                {
-                    public string Date { get; set; }
-                    public string Weekday { get; set; }
-                    public float Max { get; set; }
-                    public float Min { get; set; }
-                }
-            }
         }
     }
 }
