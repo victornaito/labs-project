@@ -5,3 +5,4 @@ Projeto com o intuito de realizar POC's sobre elementos arquiteturais que sejam 
 
 
 Project with the object to do POC (proof of concept) and helping some friends understanding some concepts. 
+This project has a simple pipeline that creates a build latest docker image for deploy's usage. 
