@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace SharedKernel.Infraestructure.RabbitMQ
 {
-    public abstract class Event : Object
+    public abstract class Event
     {
         public Guid Id { get; set; }
         public DateTime CreatedAt { get; set; }
