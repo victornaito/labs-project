@@ -30,7 +30,7 @@ services:
     clienteapi:
         build:
             context: .
-            dockerfile:  cliente/Cliente.Api/Dockerfile
+            dockerfile:  client/Client.Api/Dockerfile
         container_name: clienteapi
         hostname: clienteapi
         ports: 
