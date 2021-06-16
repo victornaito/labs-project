@@ -6,7 +6,7 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
-WORKDIR /cliente
+WORKDIR /client
 COPY ["client/Client.Api/Client.Api.csproj", "/client"]
 COPY . .
 WORKDIR /client/client/Client.Api
