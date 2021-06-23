@@ -1,6 +1,10 @@
-version: '3'
+version: '3.4'
+
 networks:   
     labs-net:
+volumes:
+  rabbitmq_data:
+    driver: local
 
 services:
     weatherapi:
@@ -9,8 +13,11 @@ services:
             dockerfile:  weatherForecast/Labs.Api/Dockerfile.application
         container_name: weatherapi
         hostname: weatherapi
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - WEATHER_API=https://api.hgbrasil.com/weather
         ports: 
-            -   5001:80
+            - 5002:80
         depends_on: 
             - customerapi
         networks: 
@@ -34,14 +41,14 @@ services:
         container_name: clienteapi
         hostname: clienteapi
         ports: 
-            -   5002:80
+            -   5001:80
         networks: 
             -   labs-net
 
     nginx:
         build:
-            context:    .
-            dockerfile:  Dockerfile.nginx
+            context: .
+            dockerfile: Dockerfile.nginx
         container_name: proxy
         hostname: proxy
         depends_on: 
@@ -69,6 +76,5 @@ services:
         - '15672:15672'
       volumes:
         - 'rabbitmq_data:/bitnami'
-volumes:
-  rabbitmq_data:
-    driver: local
+      networks: 
+        -  labs-net

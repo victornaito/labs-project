@@ -6,7 +6,7 @@ namespace SharedKernel.Extensions
     public static class MessageBrokerExtensions
     {
 
-        public static void Subscribe<EH, E, T>(this IServiceCollection services) where E : IEventHandler<T>
+        public static void Subscribe<EH, T>(this IServiceCollection services)
                                                     where EH : IEventHandler<T>
                                                     where T : Event
         {

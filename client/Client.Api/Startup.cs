@@ -1,5 +1,4 @@
 using cliente.Cliente.Api.Domain.Abstractions;
-using Cliente.Api.Infrastructure;
 using Cliente.Api.Infrastructure.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,7 +9,6 @@ using Microsoft.OpenApi.Models;
 using SharedKernel.Extensions;
 using SharedKernel.Infraestructure.RabbitMQ;
 using client.Client.Api.Infrastructure.Repositories;
-using Client.Api.Infrastructure.Services;
 
 namespace Cliente.Api
 {
@@ -31,7 +29,7 @@ namespace Cliente.Api
 
             services.AddSingleton<IRabbitMQConnection, RabbitMQConnection>();
             services.AddScoped<IEventHandler<WeatherEvent>, WeatherEventHandler>();
-            services.Subscribe<IEventHandler<WeatherEvent>, WeatherEventHandler, WeatherEvent>();
+            services.Subscribe<IEventHandler<WeatherEvent>, WeatherEvent>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
