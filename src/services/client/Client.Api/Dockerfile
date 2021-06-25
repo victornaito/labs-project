@@ -7,7 +7,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /client
-COPY ["client/Client.Api/Client.Api.csproj", "/client"]
+COPY ["src/services/client/Client.Api/Client.Api.csproj", "/client"]
 COPY . .
 WORKDIR /client/client/Client.Api
 RUN dotnet build "Client.Api.csproj" -c Release
