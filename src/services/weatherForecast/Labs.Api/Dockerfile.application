@@ -6,10 +6,10 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
-WORKDIR /src
-COPY ["src/services/weatherForecast/Labs.Api/Labs.Api.csproj", "/src"]
+WORKDIR /weather
+COPY ["src/services/weatherForecast/Labs.Api/Labs.Api.csproj", "/weather"]
 COPY . .
-WORKDIR /src/services/weatherForecast/Labs.Api
+WORKDIR /weather/src/services/weatherForecast/Labs.Api
 RUN dotnet build "Labs.Api.csproj" -c Release
 
 FROM build AS publish
