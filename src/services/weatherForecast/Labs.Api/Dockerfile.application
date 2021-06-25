@@ -9,7 +9,7 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 COPY ["src/services/weatherForecast/Labs.Api/Labs.Api.csproj", "/src"]
 COPY . .
-WORKDIR /src/weatherForecast/Labs.Api/
+WORKDIR /src/services/weatherForecast/Labs.Api
 RUN dotnet build "Labs.Api.csproj" -c Release
 
 FROM build AS publish
