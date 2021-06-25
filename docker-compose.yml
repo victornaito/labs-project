@@ -19,7 +19,7 @@ services:
         ports: 
             - 5002:80
         depends_on: 
-            - customerapi
+            - gateway
         networks: 
             - labs-net
     gateway:
@@ -50,7 +50,7 @@ services:
         hostname: proxy
         depends_on: 
             - weatherapi
-            - customerapi
+            - gateway
         ports: 
             - 8080:80
         networks: 
