@@ -36,9 +36,15 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Docker Build
+      env:
+          CLIENT_PATH: src/services/client/Client.Api/Dockerfile
+          WEATHER_PATH: src/services/weatherForecast/Labs.Api/Dockerfile.application
       run: |
-        docker build -f ./client/Client.Api/Dockerfile --tag ${{ secrets.DOCKER_USER }}/cliente-api:latest .
+        docker build -f CLIENT_PATH --tag ${{ secrets.DOCKER_USER }}/cliente-api:latest .
+        docker build -f WEATHER_PATH --tag ${{ secrets.DOCKER_USER }}/weather-api:latest .
     - name: Docker Push
-      run: docker push ${{ secrets.DOCKER_USER }}/cliente-api:latest
+      run: |
+        docker push ${{ secrets.DOCKER_USER }}/cliente-api:latest
+        docker push ${{ secrets.DOCKER_USER }}/weather-api:latest
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}

@@ -10,7 +10,7 @@ services:
     weatherapi:
         build:
             context: .
-            dockerfile:  weatherForecast/Labs.Api/Dockerfile.application
+            dockerfile: src/services/weatherForecast/Labs.Api/Dockerfile.application
         container_name: weatherapi
         hostname: weatherapi
         environment:
@@ -21,51 +21,48 @@ services:
         depends_on: 
             - customerapi
         networks: 
-            -   labs-net
-
-    customerapi:
+            - labs-net
+    gateway:
         build:
             context: .
-            dockerfile:  apiGateway/ApiGateway.Api/Dockerfile
-        container_name: customerapi
-        hostname: customerapi
+            dockerfile: src/services/apiGateway/ApiGateway.Api/Dockerfile
+        container_name: gateway
+        hostname: gateway
         ports: 
-            -   5000:80
+            - 5000:80
         networks: 
-            -   labs-net
-
+            - labs-net
     clienteapi:
         build:
             context: .
-            dockerfile:  client/Client.Api/Dockerfile
+            dockerfile: src/services/client/Client.Api/Dockerfile
         container_name: clienteapi
         hostname: clienteapi
         ports: 
-            -   5001:80
+            - 5001:80
         networks: 
-            -   labs-net
-
+            - labs-net
     nginx:
         build:
             context: .
-            dockerfile: Dockerfile.nginx
+            dockerfile: src/services/Dockerfile.nginx
         container_name: proxy
         hostname: proxy
         depends_on: 
-            -   weatherapi
-            -   customerapi
+            - weatherapi
+            - customerapi
         ports: 
-            -   8080:80
+            - 8080:80
         networks: 
-            -   labs-net
+            - labs-net
 #######################################
     mongodb:
         image: bitnami/mongodb:4.4
         restart: always
         ports: 
-            -   27017:27017
+            - 27017:27017
         networks: 
-            -   labs-net
+            - labs-net
 
     rabbitmq:
       image: docker.io/bitnami/rabbitmq:3.8
@@ -77,4 +74,4 @@ services:
       volumes:
         - 'rabbitmq_data:/bitnami'
       networks: 
-        -  labs-net
+        - labs-net
