@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -23,9 +22,11 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
   docker-registry:
     needs: build
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v2.3.4
     - name: LS -la
