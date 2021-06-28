@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatCommonModule } from '@angular/material/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeModule } from './home/home.module';
 
@@ -10,7 +12,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
   exports: [
     RouterModule
   ]
