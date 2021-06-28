@@ -1,22 +1,39 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule, Routes } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
-import { MatCommonModule } from '@angular/material/core';
-import { MatSelectModule } from '@angular/material/select';
-import { AppModule } from '../app.module';
 import { SharedModule } from '../shared/shared.module';
+import { RepoOptionsComponent } from '../repo-options/repo-options.component';
+import { RepoDetailsComponent } from '../repo-details/repo-details.component';
+import { RepoResumeComponent } from '../repo-resume/repo-resume.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    children: [
+      {
+        path: 'options',
+        component: RepoOptionsComponent
+      },
+      {
+        path: 'details',
+        component: RepoDetailsComponent
+      },
+      {
+        path: 'resume',
+        component: RepoResumeComponent
+      }
+    ]
   }
 ];
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [
+    HomeComponent,
+    RepoOptionsComponent,
+    RepoDetailsComponent,
+    RepoResumeComponent
+  ],
   imports: [
     RouterModule.forChild(routes),
     SharedModule
