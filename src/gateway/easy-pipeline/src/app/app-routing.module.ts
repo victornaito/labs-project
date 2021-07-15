@@ -7,10 +7,6 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
-  {
-    path: 'lazy-loading',
-    loadChildren: () => import('./lazy-loading/lazy-loading.module').then(m => m.LazyLoadingModule)
-  },
 ];
 
 @NgModule({
