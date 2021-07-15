@@ -1,31 +1,13 @@
 import { NgModule } from '@angular/core';
-import { HomeComponent } from './home.component';
-import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
-import { RepoOptionsComponent } from '../repo-options/repo-options.component';
-import { RepoDetailsComponent } from '../repo-details/repo-details.component';
-import { RepoResumeComponent } from '../repo-resume/repo-resume.component';
+import { CommonModule } from '@angular/common';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent,
-    children: [
-      {
-        path: 'options',
-        component: RepoOptionsComponent
-      },
-      {
-        path: 'details',
-        component: RepoDetailsComponent
-      },
-      {
-        path: 'resume',
-        component: RepoResumeComponent
-      }
-    ]
-  }
-];
+import { HomeRoutingModule } from './home-routing.module';
+import { RepoDetailsComponent } from 'src/app/repo-details/repo-details.component';
+import { RepoOptionsComponent } from 'src/app/repo-options/repo-options.component';
+import { RepoResumeComponent } from 'src/app/repo-resume/repo-resume.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { HomeComponent } from './home.component';
+
 
 @NgModule({
   declarations: [
@@ -35,11 +17,15 @@ const routes: Routes = [
     RepoResumeComponent
   ],
   imports: [
-    RouterModule.forChild(routes),
-    SharedModule
+    CommonModule,
+    SharedModule,
+    HomeRoutingModule
   ],
   exports: [
-    HomeComponent
+    HomeComponent,
+    RepoOptionsComponent,
+    RepoDetailsComponent,
+    RepoResumeComponent,
   ]
 })
 export class HomeModule { }

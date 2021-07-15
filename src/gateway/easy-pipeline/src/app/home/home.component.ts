@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +8,13 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+            private route: ActivatedRoute) { }
 
   ngOnInit( ): void {
   }
 
-  async redirectTo() {
-    await this.router.navigateByUrl("details").then();
+  public redirectTo() {
+    this.router.navigateByUrl("options");
   }
 }

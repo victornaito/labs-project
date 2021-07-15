@@ -1,19 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatCommonModule } from '@angular/material/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeModule } from './home/home.module';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-  }
+  },
+  {
+    path: 'lazy-loading',
+    loadChildren: () => import('./lazy-loading/lazy-loading.module').then(m => m.LazyLoadingModule)
+  },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    CommonModule,
+    RouterModule.forRoot(routes, { useHash: true })
   ],
   exports: [
     RouterModule

@@ -4,6 +4,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,14 +15,18 @@ import { MatButtonModule } from '@angular/material/button';
     MatSliderModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
+    MatExpansionModule
   ],
   exports: [
     CommonModule,
     MatSliderModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
+    MatExpansionModule
   ]
 })
 export class SharedModule { }

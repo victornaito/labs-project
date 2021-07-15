@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "command": "npm start",
+            "name": "Run npm start",
+            "request": "launch",
+            "type": "node-terminal",
+            "cwd": "${workspaceFolder}/src/gateway/easy-pipeline"
+        },
+        {
             "name": "Docker .NET Core Attach (Preview)",
             "type": "docker",
             "request": "attach",

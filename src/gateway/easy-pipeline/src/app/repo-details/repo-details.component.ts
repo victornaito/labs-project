@@ -7,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RepoDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor() {  console.log("constructor details");}
 
   ngOnInit(): void {
-    console.log("fodasse");
+    console.log("ts");
 
   }
 
