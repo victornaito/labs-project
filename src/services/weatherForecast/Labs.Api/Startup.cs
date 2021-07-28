@@ -31,6 +31,7 @@ namespace labs
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "labs", Version = "v1" });
             });
+
             services.AddDbContext<LabContext>(_ => _.UseSqlServer());
         }
 
@@ -54,7 +55,7 @@ namespace labs
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers().AllowAnonymous();
             });
         }
     }

@@ -1,0 +1,77 @@
+﻿<Properties StartupConfiguration="{9E353270-23C6-4B13-B0A6-44B0820CCC7F}|Cliente.Api">
+  <MonoDevelop.Ide.ItemProperties.src.services.client.Client.Api PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/services/weatherForecast/Tests/Integration/WeatherIntegrationTests.cs">
+    <Files>
+      <File FileName="src/services/weatherForecast/Tests/Integration/WeatherIntegrationTests.cs" Line="26" Column="1" />
+      <File FileName="src/services/weatherForecast/Labs.Api/Startup.cs" Line="34" Column="1" />
+      <File FileName="src/services/weatherForecast/Labs.Api/Controllers/WeatherForecastController.cs" Line="30" Column="1" />
+      <File FileName="src/services/weatherForecast/Labs.Api/Domain/Services/WeatherDomainService.cs" Line="20" Column="1" />
+      <File FileName="src/services/weatherForecast/Labs.Api/Infraestructure/ThirdParty/WeatherAPI/WeatherService.cs" Line="32" Column="1" />
+      <File FileName="src/services/SharedKernel/Infraestructure/RabbitMQ/RabbitMQConnection.cs" Line="30" Column="1" />
+      <File FileName="src/services/weatherForecast/Labs.Api/Application/Queries/Dtos/WeatherDTO.cs" Line="7" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Labs" expanded="True">
+            <Node name="src" expanded="True">
+              <Node name="services" expanded="True">
+                <Node name="SharedKernel" expanded="True">
+                  <Node name="SharedKernel" expanded="True">
+                    <Node name="Infraestructure" expanded="True">
+                      <Node name="RabbitMQ" expanded="True" />
+                    </Node>
+                  </Node>
+                </Node>
+                <Node name="weatherForecast" expanded="True">
+                  <Node name="Tests" expanded="True">
+                    <Node name="Weather.IntegrationTests" expanded="True">
+                      <Node name="WeatherIntegrationTests.cs" selected="True" />
+                    </Node>
+                  </Node>
+                  <Node name="Labs.Api" expanded="True">
+                    <Node name="Application" expanded="True">
+                      <Node name="Queries" expanded="True">
+                        <Node name="Dtos" expanded="True" />
+                      </Node>
+                    </Node>
+                    <Node name="Controllers" expanded="True" />
+                    <Node name="Domain" expanded="True">
+                      <Node name="Services" expanded="True" />
+                    </Node>
+                    <Node name="Infraestructure" expanded="True">
+                      <Node name="ThirdParty" expanded="True">
+                        <Node name="WeatherAPI" expanded="True" />
+                      </Node>
+                    </Node>
+                    <Node name="appsettings.json" expanded="True" />
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="Labs" expanded="True" selected="True">
+            <Node name="src" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/victornaito/_PROJECTS/labs/WebApiDocker/src/services/SharedKernel/Infraestructure/RabbitMQ/RabbitMQConnection.cs" relfile="src/services/SharedKernel/Infraestructure/RabbitMQ/RabbitMQConnection.cs" line="30" column="1" />
+      <Breakpoint file="/Users/victornaito/_PROJECTS/labs/WebApiDocker/src/services/weatherForecast/Labs.Api/Controllers/WeatherForecastController.cs" relfile="src/services/weatherForecast/Labs.Api/Controllers/WeatherForecastController.cs" line="29" column="1" />
+      <Breakpoint file="/Users/victornaito/_PROJECTS/labs/WebApiDocker/src/services/weatherForecast/Tests/Integration/WeatherIntegrationTests.cs" relfile="src/services/weatherForecast/Tests/Integration/WeatherIntegrationTests.cs" line="25" column="1" />
+      <Breakpoint file="/Users/victornaito/_PROJECTS/labs/WebApiDocker/src/services/weatherForecast/Tests/Integration/WeatherIntegrationTests.cs" relfile="src/services/weatherForecast/Tests/Integration/WeatherIntegrationTests.cs" line="17" column="1" />
+      <Breakpoint file="/Users/victornaito/_PROJECTS/labs/WebApiDocker/src/services/weatherForecast/Labs.Api/Controllers/WeatherForecastController.cs" relfile="src/services/weatherForecast/Labs.Api/Controllers/WeatherForecastController.cs" line="27" column="1" />
+      <Breakpoint file="/Users/victornaito/_PROJECTS/labs/WebApiDocker/src/services/weatherForecast/Tests/Integration/WeatherIntegrationTests.cs" relfile="src/services/weatherForecast/Tests/Integration/WeatherIntegrationTests.cs" line="26" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
