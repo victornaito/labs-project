@@ -1,10 +1,5 @@
-﻿using System.Text;
-using System;
-using cliente.Cliente.Api.Domain.Abstractions;
-using Microsoft.AspNetCore.Mvc;
+﻿using cliente.Cliente.Api.Domain.Abstractions;
 using Microsoft.Extensions.Logging;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 
 namespace Client.Api.Controllers
 {
