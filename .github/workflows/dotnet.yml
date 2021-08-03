@@ -45,7 +45,7 @@ jobs:
     - name: Docker Build
       run: |
         docker build -f ${{ env.CLIENT_PATH }} --tag ${{ secrets.DOCKER_USER }}/cliente-api:latest .
-        docker build -f ${{ env.WEATHER_PATH }} --tag ${{ secrets.DOCKER_USER }}/weather-api:latest
+        docker build -f ${{ env.WEATHER_PATH }} --tag ${{ secrets.DOCKER_USER }}/weather-api:latest .
         docker-compose up -d --build -f ${{ env.WEATHER_PATH }} --tag ${{ secrets.DOCKER_USER }}/weather-api:latest
     - name: Test
       run: |
