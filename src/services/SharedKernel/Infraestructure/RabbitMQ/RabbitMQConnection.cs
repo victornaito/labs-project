@@ -88,7 +88,7 @@ namespace SharedKernel.Infraestructure.RabbitMQ
         {
             return new ConnectionFactory
             {
-                // HostName = "host.docker.internal",
+                HostName = "host.docker.internal",
                 UserName = RABBITMQ_USER,
                 Password = RABBITMQ_PASSWORD
             };
