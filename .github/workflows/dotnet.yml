@@ -48,8 +48,8 @@ jobs:
         docker build -f ${{ env.WEATHER_PATH }} --tag ${{ secrets.DOCKER_USER }}/weather-api:latest .
     - name: Test
       run: |
-        docker run ${{ secrets.DOCKER_USER }}/cliente-api:latest -p 80:80 .
         docker-compose up rabbitmq
+        docker run ${{ secrets.DOCKER_USER }}/cliente-api:latest -p 80:80 .
         dotnet test --no-build --verbosity normal
     - name: Docker Push
       run: |
