@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+    CLIENT_PATH: src/services/client/Client.Api/Dockerfile
+    WEATHER_PATH: src/services/weatherForecast/Labs.Api/Dockerfile.application
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,9 +32,6 @@ jobs:
   docker-registry:
     needs: build
     runs-on: ubuntu-latest
-    env:
-        CLIENT_PATH: src/services/client/Client.Api/Dockerfile
-        WEATHER_PATH: src/services/weatherForecast/Labs.Api/Dockerfile.application
 
     steps:
     - uses: actions/checkout@v2.3.4
