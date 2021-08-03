@@ -48,7 +48,7 @@ jobs:
         docker build -f ${{ env.WEATHER_PATH }} --tag ${{ secrets.DOCKER_USER }}/weather-api:latest .
     - name: Test
       run: |
-        docker run -p 80:80 -f ${{ env.WEATHER_PATH }} --tag ${{ secrets.DOCKER_USER }}/cliente-api:latest .
+        docker run -f ${{ env.WEATHER_PATH }} -p 80:80 .
         dotnet test --no-build --verbosity normal
     - name: Docker Push
       run: |
