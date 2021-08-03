@@ -45,11 +45,10 @@ jobs:
     - name: Docker Build
       run: |
         docker build -f ${{ env.CLIENT_PATH }} --tag ${{ secrets.DOCKER_USER }}/cliente-api:latest .
-        docker build -f ${{ env.WEATHER_PATH }} --tag ${{ secrets.DOCKER_USER }}/weather-api:latest .
+        docker-compose up -d --build -f ${{ env.WEATHER_PATH }} --tag ${{ secrets.DOCKER_USER }}/weather-api:latest
     - name: Test
       run: |
-        docker-compose up -d rabbitmq --network=labs-net
-        docker run ${{ secrets.DOCKER_USER }}/cliente-api:latest -p 80:80 .
+        docker-compose up -d rabbitmq
         dotnet test --no-build --verbosity normal
     - name: Docker Push
       run: |
