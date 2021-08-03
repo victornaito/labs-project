@@ -20,8 +20,10 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    # - name: Test
+    #   run: |
+    #     docker run -p 80:80 -t container_test
+    #     dotnet test --no-build --verbosity normal
 
   docker-registry:
     needs: build
@@ -43,6 +45,10 @@ jobs:
       run: |
         docker build -f ${{ env.CLIENT_PATH }} --tag ${{ secrets.DOCKER_USER }}/cliente-api:latest .
         docker build -f ${{ env.WEATHER_PATH }} --tag ${{ secrets.DOCKER_USER }}/weather-api:latest .
+     - name: Test
+      run: |
+        docker run -p 80:80 -f ${{ env.WEATHER_PATH }} --tag ${{ secrets.DOCKER_USER }}/cliente-api:latest .
+        dotnet test --no-build --verbosity normal
     - name: Docker Push
       run: |
         docker push ${{ secrets.DOCKER_USER }}/cliente-api:latest
