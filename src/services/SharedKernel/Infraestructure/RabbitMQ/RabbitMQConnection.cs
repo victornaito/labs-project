@@ -5,6 +5,7 @@ using RabbitMQ.Client.Events;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using SharedKernel.CrossCutting;
 
 namespace SharedKernel.Infraestructure.RabbitMQ
 {
@@ -49,29 +50,39 @@ namespace SharedKernel.Infraestructure.RabbitMQ
 
         private string StartBasicConsume(Type eventType, Type typeEH)
         {
-            string @event = null;
-            var body = new byte[0];
             IModel channel;
             EventingBasicConsumer consumer;
-
             GetEventConsumer(out channel, out consumer);
-            var _eventHandler = _provider.GetService(typeEH).GetType();
 
-            consumer.Received += (ch, ea) =>
+            try
             {
-                body = ea.Body.ToArray();
-                @event = UTF8Encoding.UTF8.GetString(body);
-                _logger.LogTrace(@event);
+                string @event = null;
+                var body = new byte[0];
 
-                var eventInstance = Activator.CreateInstance(eventType, @event);
-                var method = _eventHandler.GetMethod("Handle", new Type[] { eventType });
-                var task = (Task)method.Invoke(eventInstance, new Object[] { eventInstance });
-                task.GetAwaiter().GetResult();
+                var _eventHandler = _provider.GetService(typeEH).GetType();
+                var _eventHandlers = Activator.CreateInstance(_provider.GetService(typeEH).GetType(), null);
 
-                channel.BasicAck(ea.DeliveryTag, true);
-            };
+                consumer.Received += (ch, ea) =>
+                {
+                    body = ea.Body.ToArray();
+                    @event = UTF8Encoding.UTF8.GetString(body);
+                    _logger.LogTrace(@event);
 
-            return channel.BasicConsume(Queue, false, consumer);
+                    var eventInstance = Activator.CreateInstance(eventType, @event);
+                    var methods = _eventHandler.GetInterfaces()[0].GetMethod("Handle", new Type[] { eventType });
+                    var task = (Task) methods.Invoke(_eventHandlers, new object[] { eventInstance });
+                    task.GetAwaiter().GetResult();
+
+                    channel.BasicAck(ea.DeliveryTag, true);
+                };
+
+                return channel.BasicConsume(Queue, false, consumer);
+            }
+            catch
+            {
+                channel.BasicNack(default, default,  true);
+                throw;
+            }
         }
 
         private static void GetEventConsumer(out IModel channel, out EventingBasicConsumer consumer)
@@ -88,7 +99,7 @@ namespace SharedKernel.Infraestructure.RabbitMQ
         {
             return new ConnectionFactory
             {
-                HostName = "host.docker.internal",
+                HostName = VariableEnvironments.HOST_RABBITMQ,
                 UserName = RABBITMQ_USER,
                 Password = RABBITMQ_PASSWORD
             };

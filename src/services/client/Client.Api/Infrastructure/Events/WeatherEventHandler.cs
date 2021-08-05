@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Cliente.Api.Infrastructure.Interfaces;
 using SharedKernel.Infraestructure.RabbitMQ;
 
 namespace Cliente.Api.Infrastructure.Events
@@ -9,7 +10,7 @@ namespace Cliente.Api.Infrastructure.Events
         {
         }
 
-        public static async Task Handle(WeatherEvent @event)
+        public async Task Handle(WeatherEvent @event)
         {
             await Task.FromResult(@event);
         }

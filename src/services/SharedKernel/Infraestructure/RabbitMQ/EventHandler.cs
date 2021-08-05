@@ -4,9 +4,6 @@ namespace SharedKernel.Infraestructure.RabbitMQ
 {
     public interface IEventHandler<T> : IEventHandler where T : Event
     {
-        public static async Task Handle(T msg)
-        {
-            await Task.CompletedTask;
-        }
+        Task Handle(T msg);
     }
 }

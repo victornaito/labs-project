@@ -5,9 +5,7 @@ namespace Cliente.Api.Infrastructure.Events
 {
     public class WeatherEvent : Event
     {
-        public WeatherEvent()
-        {
-        }
+        public WeatherEvent() {}
 
         public WeatherEvent(string json)
         {
@@ -27,7 +25,7 @@ namespace Cliente.Api.Infrastructure.Events
             public string Date { get; set; }
             public string Time { get; set; }
             public string city_name { get; set; }
-            public List<ForecastDto> Forecast { get; set; }
+            public ICollection<ForecastDto> Forecast { get; set; }
 
             public class ForecastDto
             {
